@@ -4,6 +4,17 @@ A python program that calculates how close you where from the latest bad nature 
 With the help of `https://earthquake.usgs.gov` API. It also shows you some information that is
 useful or interesting to see.
 
+## API Notes
+
+So the `https://earthquake.usgs.gov/` API endpoint provides me with the option to query for specific
+parameters those parameters are explained
+[here](https://earthquake.usgs.gov/fdsnws/event/1/#parameters). For the first iteration of this
+project I will use a query that checks earthquakes for a specific time frame (1-3 day from the
+current date) and filter for events that have a magnitude over 6 this means a noticeable earthquake
+that had impact. Then I will take the coordinates of all the events that occurred in the time frame
+and calculate the closest event. Some information of this event will then be displayed in the
+terminal.
+
 ## Development
 
 Install the requirements:
@@ -27,12 +38,6 @@ print(hc)
 ```
 
 ## Contribute
-
-Here's the updated contribution section:
-
----
-
-## Contributions
 
 I’m excited to welcome contributions to **howclose**! If you'd like to contribute, follow the guidelines below to ensure a smooth collaboration:
 
