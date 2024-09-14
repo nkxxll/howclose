@@ -1,22 +1,23 @@
-from datetime import datetime, timedelta
+import json
 
-from howclose import EarthquakeAPIURLBuilder, FormatType, OrderType
+import requests
+
+from howclose import EarthquakeAPIURLBuilder, FormatType, OrderType, cli
 
 
 def main():
-    default_delta = timedelta(days=30)
-    now = datetime.now()
+    args = cli()
     url = (
         EarthquakeAPIURLBuilder()
         .format(FormatType.GEOJSON)
-        .time(starttime=now - default_delta, endtime=now)
-        .limit(number=10)
-        .maxdepth(depth=10)
-        .magnitude(magnitude=6)
+        .time(starttime=args.starttime, endtime=args.endtime)
+        .limit(limit=args.limit)
+        .minmagnitude(minmagnitude=6)
         .orderby(OrderType.MAGNITUDE)
         .finalize()
     )
-    print(url)
+    response: requests.Response = requests.get(url=url)
+    print(json.dumps(response.json(), indent=4))
 
 
 if __name__ == "__main__":
