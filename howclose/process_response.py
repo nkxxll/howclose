@@ -38,23 +38,23 @@ class Coordinate:
 
 class Data:
     def __init__(self, feature: dict, current: Coordinate) -> None:
-        coordinate = feature["geometry"]["coordinate"]
+        coordinates = feature["geometry"]["coordinates"]
         lon, lat = (
-            coordinate[0],
-            coordinate[1],
+            coordinates[0],
+            coordinates[1],
         )
-        distance = current.haversine(Coordinate(lon, lat))
+        self.distance = current.haversine(Coordinate(lon, lat))
         self.all = {
             "longditude_current": current.lon,
             "latitude_current": current.lat,
             "latitude_event": lat,
             "longditude_event": lon,
-            "distance": distance,
+            "distance": self.distance,
         }
 
     def json(self):
         # todo: json representation
-        return dumps(self.all)
+        return dumps(self.all, indent=2)
 
     def text(self):
         # todo: text representation

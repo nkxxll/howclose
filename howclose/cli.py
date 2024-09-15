@@ -42,4 +42,11 @@ def cli_args() -> argparse.Namespace:
         default=OutputFormat.JSON,
         help="Format type of the app output",
     )
+    ap.add_argument(
+        "-m",
+        "--minmagnitude",
+        type=int,
+        default=6,
+        help="Minimal magnitude of the earthquake event",
+    )
     return ap.parse_args()
