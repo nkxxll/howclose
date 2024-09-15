@@ -37,6 +37,12 @@ hc = howclose.HowClose().full_information()
 print(hc)
 ```
 
+## Feature TODOs
+
+- [ ] add the name of the event to the output
+- [ ] name of the city in which the event occurred
+- [ ] option to define the lat, lng and a radius if you don't want to use the current position
+
 ## Contribute
 
 I’m excited to welcome contributions to **howclose**! If you'd like to contribute, follow the guidelines below to ensure a smooth collaboration:
