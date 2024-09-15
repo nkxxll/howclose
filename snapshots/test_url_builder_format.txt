@@ -1,1 +1,1 @@
-https://earthquake.usgs.gov/fdsnws/event/1/query?orderby=magnitude-asc&
+https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&

@@ -1,3 +1,4 @@
+from json import dumps
 from math import asin, cos, radians, sin, sqrt
 from operator import attrgetter
 from typing import Self
@@ -11,11 +12,17 @@ class Coordinate:
         self.lat = lat
 
     def haversine(self, other: Self) -> float:
-        """
+        """Calculate Haversine distance between two points
+
         Calculate the great circle distance in kilometers between two points
-        on the earth (specified in decimal degrees)
+        on the earth (specified in decimal degrees). NOTE: code stolen from stackoverflow.
+
+        Args:
+            other: Point to calculate the distance to
+
+        Returns:
+            A float with the distance
         """
-        # convert decimal degrees to radians
         lon1, lat1, lon2, lat2 = map(
             radians, [self.lon, self.lat, other.lon, other.lat]
         )
@@ -31,16 +38,31 @@ class Coordinate:
 
 class Data:
     def __init__(self, feature: dict, current: Coordinate) -> None:
-        self.lon, self.lat = feature["coordinate"][0], feature["coordinate"][1]
-        self.distance = current.haversine(Coordinate(self.lon, self.lat))
+        coordinate = feature["geometry"]["coordinate"]
+        lon, lat = (
+            coordinate[0],
+            coordinate[1],
+        )
+        distance = current.haversine(Coordinate(lon, lat))
+        self.all = {
+            "longditude_current": current.lon,
+            "latitude_current": current.lat,
+            "latitude_event": lat,
+            "longditude_event": lon,
+            "distance": distance,
+        }
 
     def json(self):
         # todo: json representation
-        return "json"
+        return dumps(self.all)
 
     def text(self):
         # todo: text representation
-        return "text"
+        text = ""
+        for k, v in self.all:
+            text += f"{k}: {v}\n"
+        text.strip()
+        return text
 
 
 def process_georequest(response_json: dict, current: Coordinate, format: OutputFormat):

@@ -17,7 +17,7 @@ def valid_date(s: str) -> datetime:
         raise argparse.ArgumentTypeError(f"not a valid date: {s!r}")
 
 
-def cli() -> argparse.Namespace:
+def cli_args() -> argparse.Namespace:
     ap = argparse.ArgumentParser()
     ap.add_argument(
         "-st",
